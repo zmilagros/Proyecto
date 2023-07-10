@@ -16,6 +16,14 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+#! sys.path es una lista de rutas donde Python busca módulos para importar
+#! servirá para poder importar las aplicaciones de la carpeta apps
+import sys
+
+APPS_DIR = BASE_DIR / "apps"
+sys.path.append(str(APPS_DIR))
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -37,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cliente',
+    'producto',
+    'Home'
 ]
 
 MIDDLEWARE = [
