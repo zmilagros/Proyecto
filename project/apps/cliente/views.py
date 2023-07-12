@@ -1,7 +1,10 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from .models import Cliente, Pais
+
+from .forms import ClienteForm
 
 
 def home(request):
@@ -31,3 +34,14 @@ def crear_clientes(request):
     c3.save()
     c4.save()
     return redirect("cliente:home")
+
+def crear_cliente(request: HttpRequest) -> HttpResponse:
+    
+    if request.method == "POST":
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("cliente:home")
+    else:  # request.method == "GET"
+        form = ClienteForm()
+    return render(request, "cliente/crear.html", {"form": form})
